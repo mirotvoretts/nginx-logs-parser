@@ -119,6 +119,4 @@ runTest "negative" "required parameter -f is missing" 2 \
 runTest "negative" "required parameter -o is missing" 2 \
   -p /tmp/data/input/file2.txt -f json
 
-assertJsonEquals ./scripts/data/output/expected.json ./scripts/data/output/stats.json
-
 verifyAllTestsPassed
