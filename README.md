@@ -1,4 +1,4 @@
-# 📊 NGINX Log Analyzer
+# NGINX Log Analyzer
 
 [![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge&logo=openjdk)](https://openjdk.org/)
 [![Maven](https://img.shields.io/badge/Maven-3.9+-blue?style=for-the-badge&logo=apachemaven)](https://maven.apache.org/)
@@ -9,29 +9,15 @@ A powerful command-line tool for analyzing NGINX access logs with support for mu
 
 ## Features
 
-- 📁 **Multiple Input Sources** - Local files, glob patterns, and remote URLs
-- 📊 **Comprehensive Statistics** - Request counts, response sizes, status codes, and more
-- 📈 **Percentile Calculations** - 95th percentile response size analysis
-- 📅 **Date Filtering** - Filter logs by date range (ISO8601 format)
-- 📝 **Multiple Output Formats** - JSON, Markdown, and AsciiDoc
-- 🚀 **Memory Efficient** - Stream-based processing for large files
-- 🔍 **Smart Parsing** - Handles malformed log entries gracefully
+- **Multiple Input Sources** - Local files, glob patterns, and remote URLs
+- **Comprehensive Statistics** - Request counts, response sizes, status codes, and more
+- **Percentile Calculations** - 95th percentile response size analysis
+- **Date Filtering** - Filter logs by date range (ISO8601 format)
+- **Multiple Output Formats** - JSON, Markdown, and AsciiDoc
+- **Memory Efficient** - Stream-based processing for large files
+- **Smart Parsing** - Handles malformed log entries gracefully
 
----
-
-## 📋 Table of Contents
-
-- [Installation](#-installation)
-- [Usage](#-usage)
-- [Output Formats](#-output-formats)
-- [Statistics Collected](#-statistics-collected)
-- [Examples](#-examples)
-- [Testing](#-testing)
-- [License](#-license)
-
----
-
-## 🚀 Installation
+## Installation
 
 ### Prerequisites
 
@@ -52,9 +38,7 @@ mvn clean package shade:shade -DskipTests
 ls target/hw3-logs-1.0.jar
 ```
 
----
-
-## 💻 Usage
+## Usage
 
 ### Basic Syntax
 
@@ -80,9 +64,7 @@ java -jar nginx-log-analyzer.jar --path <source> --format <format> --output <fil
 | `1` | Unexpected error |
 | `2` | Invalid usage (wrong parameters, missing files, etc.) |
 
----
-
-## 📝 Output Formats
+## Output Formats
 
 ### JSON
 
@@ -142,9 +124,7 @@ Max Response Size: 3316.0b
 - 404: 2 responses
 ```
 
----
-
-## 📊 Statistics Collected
+## Statistics Collected
 
 | Statistic | Description |
 |-----------|-------------|
@@ -157,9 +137,7 @@ Max Response Size: 3316.0b
 | **Requests per Date** | Daily request distribution with percentages |
 | **Unique Protocols** | List of unique protocols (HTTP/1.1, HTTP/2, etc.) |
 
----
-
-## 📖 Examples
+## Examples
 
 ### Analyze Local File
 
@@ -209,48 +187,7 @@ java -jar nginx-log-analyzer.jar \
   --from 2024-06-01
 ```
 
----
-
-## 🏗️ Architecture
-
-```
-src/main/java/academy/
-├── Application.java           # Entry point
-├── cli/                       # Command line interface
-│   └── LogAnalyzerCommand.java
-├── export/                    # Output exporters
-│   ├── ILogsExporter.java
-│   ├── JsonExporter.java
-│   ├── MarkdownExporter.java
-│   ├── AdocExporter.java
-│   └── LogExporterFactory.java
-├── model/                     # Data models
-│   ├── LogRecord.java
-│   └── ExportFormat.java
-├── parser/                    # Log parsing
-│   └── NginxLogParser.java
-├── reader/                    # Input sources
-│   ├── LogReader.java
-│   ├── FileLogReader.java
-│   └── UrlLogReader.java
-├── service/                   # Business logic
-│   ├── LogAnalyzerService.java
-│   └── ArgumentsValidator.java
-└── stats/                     # Statistics
-    ├── Stats.java
-    └── StatsCollector.java
-```
-
-### Design Patterns Used
-
-- **Factory Pattern** — `LogExporterFactory` for creating exporters
-- **Strategy Pattern** — Different export strategies for each format
-- **Builder Pattern** — Statistics collection
-- **Stream Processing** — Memory-efficient log processing
-
----
-
-## 🧪 Testing
+## Testing
 
 ### Run All Tests
 
@@ -281,9 +218,7 @@ The project maintains **50%+ code coverage** with comprehensive tests for:
 - Input validation
 - Error handling
 
----
-
-## 📁 Supported Log Format
+## Supported Log Format
 
 The analyzer supports standard NGINX combined log format:
 
@@ -297,9 +232,7 @@ $remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$
 93.180.71.3 - - [17/May/2015:08:05:32 +0000] "GET /downloads/product_1 HTTP/1.1" 304 0 "-" "Debian APT-HTTP/1.3"
 ```
 
----
-
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Technology | Purpose |
 |------------|---------|
@@ -312,8 +245,6 @@ $remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$
 | **JUnit 5** | Unit testing |
 | **AssertJ** | Fluent assertions |
 
----
-
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
