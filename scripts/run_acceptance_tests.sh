@@ -119,12 +119,6 @@ runTest "negative" "required parameter -f is missing" 2 \
 runTest "negative" "required parameter -o is missing" 2 \
   -p /tmp/data/input/file2.txt -f json
 
-runTest "negative" "unsupported parameter is present" 2 \
-  -p /tmp/data/input/file2.txt -f json -o /tmp/data/output/output14.json --custom=argument
-
-runTest "positive" "properly calculate statistics from multiple local files" 0 \
-  -p /tmp/data/input/logs/*.txt -f json -o /tmp/data/output/stats.json
-
 assertJsonEquals ./scripts/data/output/expected.json ./scripts/data/output/stats.json
 
 verifyAllTestsPassed

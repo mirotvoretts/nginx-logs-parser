@@ -27,8 +27,8 @@ public class LogsReader {
      * Processes deleted log files with lazy reading.
      *
      * @param path path to the deleted resource.
-     * @throws IllegalArgumentException any caught error is thrown as {@link IllegalArgumentException},
-     *                                  including for testing convenience.
+     * @throws IllegalArgumentException any caught error is thrown as {@link IllegalArgumentException}, including for
+     *     testing convenience.
      */
     public void processRemoteFiles(String path) {
         RemoteLogReader reader = new RemoteLogReader();
@@ -48,8 +48,8 @@ public class LogsReader {
      * each step.
      *
      * @param path path/glob pattern to the file(s)
-     * @throws IllegalArgumentException any caught error is thrown as {@link IllegalArgumentException},
-     *                                  including for testing convenience
+     * @throws IllegalArgumentException any caught error is thrown as {@link IllegalArgumentException}, including for
+     *     testing convenience
      */
     public void processLocalFiles(String path) {
         var inputFiles = ArgumentsValidator.getValidFiles(path);
@@ -58,7 +58,7 @@ public class LogsReader {
             statsCollector.addFile(inputFile.getName());
 
             try (var inputStream = Files.newInputStream(inputFile.toPath());
-                 Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8)) {
+                    Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8)) {
 
                 while (scanner.hasNextLine()) {
                     String line = scanner.nextLine();

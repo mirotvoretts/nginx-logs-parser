@@ -10,27 +10,15 @@ import org.jetbrains.annotations.Nullable;
  * “$http_referer” “$http_user_agent”}
  *
  * @param remoteAddress Client IP address
- * @param remoteUser    Username for authentication
- * @param timeLocal     Request time in local server time
- * @param request       HTTP request (method, URI, protocol)
- * @param status        HTTP response status
+ * @param remoteUser Username for authentication
+ * @param timeLocal Request time in local server time
+ * @param request HTTP request (method, URI, protocol)
+ * @param status HTTP response status
  * @param bodyBytesSent Response body size in bytes
- * @param httpReferer   Request source URL
+ * @param httpReferer Request source URL
  * @param httpUserAgent Client User-Agent
  */
 public record LogFields(
-    String remoteAddress,
-    String remoteUser,
-    LocalDate timeLocal,
-    String request,
-    int status,
-    double bodyBytesSent,
-    String httpReferer,
-    String httpUserAgent,
-    String requestResource,
-    @Nullable String requestProtocol) {
-
-    public LogFields(
         String remoteAddress,
         String remoteUser,
         LocalDate timeLocal,
@@ -38,18 +26,30 @@ public record LogFields(
         int status,
         double bodyBytesSent,
         String httpReferer,
-        String httpUserAgent) {
+        String httpUserAgent,
+        String requestResource,
+        @Nullable String requestProtocol) {
+
+    public LogFields(
+            String remoteAddress,
+            String remoteUser,
+            LocalDate timeLocal,
+            String request,
+            int status,
+            double bodyBytesSent,
+            String httpReferer,
+            String httpUserAgent) {
         this(
-            remoteAddress,
-            remoteUser,
-            timeLocal,
-            request,
-            status,
-            bodyBytesSent,
-            httpReferer,
-            httpUserAgent,
-            getRequestResource(request),
-            getRequestProtocol(request));
+                remoteAddress,
+                remoteUser,
+                timeLocal,
+                request,
+                status,
+                bodyBytesSent,
+                httpReferer,
+                httpUserAgent,
+                getRequestResource(request),
+                getRequestProtocol(request));
     }
 
     private static String getRequestResource(String request) {

@@ -13,9 +13,7 @@ import java.util.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-/**
- * Collects statistics by selecting log entries no earlier than {@param from} and no later than {@param to}
- */
+/** Collects statistics by selecting log entries no earlier than {@param from} and no later than {@param to} */
 public class StatsCollector {
     private static final Logger LOGGER = LogManager.getLogger(StatsCollector.class);
 
@@ -33,7 +31,7 @@ public class StatsCollector {
 
     /**
      * @param from lower time limit
-     * @param to   upper time limit
+     * @param to upper time limit
      */
     public StatsCollector(LocalDate from, LocalDate to) {
         LOGGER.debug("Creating StatsCollector with date range: from={}, to={}", from, to);
@@ -44,7 +42,7 @@ public class StatsCollector {
 
     private void aggregateStats() {
         stats.getResponseSizeInBytes().average =
-            calculateAverage(totalResponseSizeInBytes, stats.getTotalRequestsCount());
+                calculateAverage(totalResponseSizeInBytes, stats.getTotalRequestsCount());
         stats.getResponseSizeInBytes().p95 = calculatePercentile(allResponseSizes, 95);
         stats.setResources(getTopResources(10));
         stats.setResponseCodes(getResponseCodes());
@@ -54,17 +52,17 @@ public class StatsCollector {
 
     private List<ResourceData> getTopResources(int limit) {
         return resourceCounts.entrySet().stream()
-            .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-            .limit(limit)
-            .map(entry -> new ResourceData(entry.getKey(), entry.getValue()))
-            .toList();
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .limit(limit)
+                .map(entry -> new ResourceData(entry.getKey(), entry.getValue()))
+                .toList();
     }
 
     private List<ResponseCode> getResponseCodes() {
         return responseCodeCounts.entrySet().stream()
-            .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
-            .map(entry -> new ResponseCode(entry.getKey(), entry.getValue()))
-            .toList();
+                .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
+                .map(entry -> new ResponseCode(entry.getKey(), entry.getValue()))
+                .toList();
     }
 
     private List<RequestData> getRequestsPerDate() {
@@ -73,13 +71,13 @@ public class StatsCollector {
         }
 
         return requestsPerDate.entrySet().stream()
-            .sorted(Map.Entry.comparingByKey())
-            .map(entry -> new RequestData(
-                entry.getKey().toString(),
-                entry.getKey().getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH),
-                entry.getValue(),
-                calculatePercent(entry.getValue(), stats.getTotalRequestsCount())))
-            .toList();
+                .sorted(Map.Entry.comparingByKey())
+                .map(entry -> new RequestData(
+                        entry.getKey().toString(),
+                        entry.getKey().getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH),
+                        entry.getValue(),
+                        calculatePercent(entry.getValue(), stats.getTotalRequestsCount())))
+                .toList();
     }
 
     private void updateProtocol(LogFields fields) {
@@ -140,11 +138,11 @@ public class StatsCollector {
         aggregateStats();
 
         LOGGER.info(
-            "Final stats: {} requests, {} resources, {} dates, {} protocols",
-            stats.getTotalRequestsCount(),
-            stats.getResources().size(),
-            stats.getRequestsPerDate().size(),
-            stats.getUniqueProtocols().size());
+                "Final stats: {} requests, {} resources, {} dates, {} protocols",
+                stats.getTotalRequestsCount(),
+                stats.getResources().size(),
+                stats.getRequestsPerDate().size(),
+                stats.getUniqueProtocols().size());
 
         return stats;
     }

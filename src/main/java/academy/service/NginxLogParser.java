@@ -15,22 +15,22 @@ public class NginxLogParser {
     private static final Logger LOGGER = LogManager.getLogger(NginxLogParser.class);
 
     /**
-     * Regular expression matching the pattern: {@code $remote_addr - $remote_user [$time_local] “$request”
-     * $status $body_bytes_sent “$http_referer” “$http_user_agent”}
+     * Regular expression matching the pattern: {@code $remote_addr - $remote_user [$time_local] “$request” $status
+     * $body_bytes_sent “$http_referer” “$http_user_agent”}
      */
     private static final Pattern PATTERN =
-        Pattern.compile("^([\\d.]+) - (\\S+) \\[([^]]+)] \"([^\"]+)\" (\\d{3}) (\\d+) \"([^\"]*)\" \"([^\"]*)\"$");
+            Pattern.compile("^([\\d.]+) - (\\S+) \\[([^]]+)] \"([^\"]+)\" (\\d{3}) (\\d+) \"([^\"]*)\" \"([^\"]*)\"$");
 
     private LogFields getLogFields(Matcher matcher) {
         return new LogFields(
-            matcher.group(1),
-            matcher.group(2),
-            parseDate(matcher.group(3)),
-            matcher.group(4),
-            Integer.parseInt(matcher.group(5)),
-            Double.parseDouble(matcher.group(6)),
-            matcher.group(7),
-            matcher.group(8));
+                matcher.group(1),
+                matcher.group(2),
+                parseDate(matcher.group(3)),
+                matcher.group(4),
+                Integer.parseInt(matcher.group(5)),
+                Double.parseDouble(matcher.group(6)),
+                matcher.group(7),
+                matcher.group(8));
     }
 
     /**

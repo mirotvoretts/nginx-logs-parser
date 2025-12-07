@@ -56,37 +56,37 @@ public class MarkdownExporter implements ILogsExporter {
             | 95th Percentile Response Size| %s         |%n\
             | Max Response Size            | %s         |%n\
             """
-            .formatted(
-                String.join(", ", stats.getFiles()),
-                stats.getTotalRequestsCount(),
-                formatBytes(stats.getResponseSizeInBytes().average),
-                formatBytes(stats.getResponseSizeInBytes().p95),
-                formatBytes(stats.getResponseSizeInBytes().max));
+                .formatted(
+                        String.join(", ", stats.getFiles()),
+                        stats.getTotalRequestsCount(),
+                        formatBytes(stats.getResponseSizeInBytes().average),
+                        formatBytes(stats.getResponseSizeInBytes().p95),
+                        formatBytes(stats.getResponseSizeInBytes().max));
     }
 
     private String createResourcesTable(Stats stats) {
         StringBuilder table = new StringBuilder(
-            """
+                """
                 | Resource | Request Count |
                 |:---------|:--------------|
                 """);
 
         stats.getResources()
-            .forEach(r -> table.append("| %s | %d |%n".formatted(r.resource(), r.totalRequestsCount())));
+                .forEach(r -> table.append("| %s | %d |%n".formatted(r.resource(), r.totalRequestsCount())));
 
         return table.toString();
     }
 
     private String createResponseCodesTable(Stats stats) {
         StringBuilder table = new StringBuilder(
-            """
+                """
                 | Code | Description | Count |
                 |:----:|:------------|------:|
                 """);
 
         stats.getResponseCodes()
-            .forEach(c -> table.append("| %d | %s | %d |%n"
-                .formatted(c.code(), getHttpStatusDescription(c.code()), c.totalResponsesCount())));
+                .forEach(c -> table.append("| %d | %s | %d |%n"
+                        .formatted(c.code(), getHttpStatusDescription(c.code()), c.totalResponsesCount())));
 
         return table.toString();
     }
